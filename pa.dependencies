@@ -1,12 +1,5 @@
 [
     {
-        "remote":       "cm",
-        "account":      "CyanogenMod",
-        "repository":   "android_packages_apps_Torch",
-        "target_path":  "packages/apps/Torch",
-        "revision":     "cm-10.2"
-    },
-    {
         "remote":       "github",
         "account":      "AOSPA",
         "repository":   "android_hardware_qcom_power",
