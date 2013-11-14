@@ -1,45 +1,9 @@
 [
     {
-        "remote":       "github",
-        "account":      "AOSPA",
-        "repository":   "android_hardware_qcom_power",
-        "target_path":  "hardware/qcom/power",
-        "revision":     "kitkat"
-    },
-    {
-        "remote":       "github",
-        "account":      "TheMuppets",
-        "repository":   "proprietary_vendor_lge",
-        "target_path":  "vendor/lge",
-        "revision":     "cm-11.0"
-    },
-    {
         "remote":       "aosp",
         "account":      "device",
         "repository":   "lge/hammerhead-kernel",
         "target_path":  "device/lge/hammerhead-kernel",
-        "revision":     "refs/tags/android-4.4_r1.1"
-    },
-    {
-        "remote":       "github",
-        "account":      "AOSPA",
-        "repository":   "android_hardware_qcom_display",
-        "target_path":  "hardware/qcom/display",
-        "revision":     "kitkat"
-    },
-    {
-        "remote":       "aosp",
-        "account":      "platform",
-        "repository":   "hardware/qcom/media",
-        "target_path":  "hardware/qcom/media",
-        "revision":     "refs/tags/android-4.4_r1.1"
-    },
-
-    {
-        "remote":       "aosp",
-        "account":      "platform",
-        "repository":   "hardware/qcom/wlan",
-        "target_path":  "hardware/qcom/wlan",
         "revision":     "refs/tags/android-4.4_r1.1"
     },
     {
@@ -59,9 +23,16 @@
     {
         "remote":       "aosp",
         "account":      "platform",
-        "repository":   "hardware/qcom/msm8x74",
-        "target_path":  "hardware/qcom/msm8x74",
+        "repository":   "hardware/qcom/camera",
+        "target_path":  "hardware/qcom/camera",
         "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "github",
+        "account":      "AOSPA",
+        "repository":   "android_hardware_qcom_display",
+        "target_path":  "hardware/qcom/display",
+        "revision":     "kitkat"
     },
     {
         "remote":       "aosp",
@@ -70,11 +41,53 @@
         "target_path":  "hardware/qcom/keymaster",
         "revision":     "refs/tags/android-4.4_r1.1"
     },
+	{
+        "remote":       "aosp",
+        "account":      "platform",
+        "repository":   "hardware/qcom/media",
+        "target_path":  "hardware/qcom/media",
+        "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "aosp",
+        "account":      "platform",
+        "repository":   "hardware/qcom/msm8x74",
+        "target_path":  "hardware/qcom/msm8x74",
+        "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "aosp",
+        "account":      "platform",
+        "repository":   "hardware/qcom/msm8960",
+        "target_path":  "hardware/qcom/msm8960",
+        "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "github",
+        "account":      "AOSPA",
+        "repository":   "android_hardware_qcom_power",
+        "target_path":  "hardware/qcom/power",
+        "revision":     "kitkat"
+    },
     {
         "remote":       "aosp",
         "account":      "platform",
         "repository":   "hardware/qcom/sensors",
         "target_path":  "hardware/qcom/sensors",
         "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "aosp",
+        "account":      "platform",
+        "repository":   "hardware/qcom/wlan",
+        "target_path":  "hardware/qcom/wlan",
+        "revision":     "refs/tags/android-4.4_r1.1"
+    },
+    {
+        "remote":       "github",
+        "account":      "TheMuppets",
+        "repository":   "proprietary_vendor_lge",
+        "target_path":  "vendor/lge",
+        "revision":     "cm-11.0"
     }
 ]
