@@ -107,5 +107,3 @@ BOARD_SEPOLICY_UNION := \
 HAVE_ADRENO_SOURCE:= false
 
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
-
--include vendor/lge/hammerhead/BoardConfigVendor.mk
