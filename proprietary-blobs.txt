@@ -85,26 +85,7 @@
 /system/lib/libQSEEComAPI.so
 /system/lib/libril-qc-qmi-1.so
 /system/lib/libstagefright_hdcp.so
-/system/lib/libWVphoneAPI.so
 /system/lib/libxml.so
-<<<<<<< HEAD
-/system/vendor/bin/vss_init
-/system/vendor/firmware/adsp.b00
-/system/vendor/firmware/adsp.b01
-/system/vendor/firmware/adsp.b02
-/system/vendor/firmware/adsp.b03
-/system/vendor/firmware/adsp.b04
-/system/vendor/firmware/adsp.b05
-/system/vendor/firmware/adsp.b06
-/system/vendor/firmware/adsp.b07
-/system/vendor/firmware/adsp.b08
-/system/vendor/firmware/adsp.b09
-/system/vendor/firmware/adsp.b10
-/system/vendor/firmware/adsp.b11
-/system/vendor/firmware/adsp.b12
-/system/vendor/firmware/adsp.mdt
-=======
->>>>>>> aosp/kitkat-mr1-release
 /system/vendor/firmware/a330_pfp.fw
 /system/vendor/firmware/a330_pm4.fw
 /system/vendor/firmware/adsp.b00
@@ -136,14 +117,6 @@
 /system/vendor/firmware/cmnlib.b02
 /system/vendor/firmware/cmnlib.b03
 /system/vendor/firmware/cmnlib.mdt
-<<<<<<< HEAD
-/system/vendor/firmware/discretix/dxhdcp2.b00
-/system/vendor/firmware/discretix/dxhdcp2.b01
-/system/vendor/firmware/discretix/dxhdcp2.b02
-/system/vendor/firmware/discretix/dxhdcp2.b03
-/system/vendor/firmware/discretix/dxhdcp2.mdt
-=======
->>>>>>> aosp/kitkat-mr1-release
 /system/vendor/firmware/keymaster/keymaster.b00
 /system/vendor/firmware/keymaster/keymaster.b01
 /system/vendor/firmware/keymaster/keymaster.b02
@@ -155,12 +128,6 @@
 /system/vendor/firmware/venus.b03
 /system/vendor/firmware/venus.b04
 /system/vendor/firmware/venus.mdt
-/system/vendor/firmware/widevine.b00
-/system/vendor/firmware/widevine.b01
-/system/vendor/firmware/widevine.b02
-/system/vendor/firmware/widevine.b03
-/system/vendor/firmware/widevine.mdt
-/system/vendor/lib/drm/libdrmwvmplugin.so
 /system/vendor/lib/egl/eglsubAndroid.so
 /system/vendor/lib/egl/libEGL_adreno.so
 /system/vendor/lib/egl/libGLESv1_CM_adreno.so
@@ -234,18 +201,3 @@
 /system/vendor/lib/libsensor_user_cal.so
 /system/vendor/lib/libTimeService.so
 /system/vendor/lib/libtime_genoff.so
-<<<<<<< HEAD
-/system/vendor/lib/libvdmengine.so
-/system/vendor/lib/libvdmfumo.so
-/system/vendor/lib/libvss_common_core.so
-/system/vendor/lib/libvss_common_idl.so
-/system/vendor/lib/libvss_common_iface.so
-/system/vendor/lib/libvss_nv_core.so
-/system/vendor/lib/libvss_nv_idl.so
-/system/vendor/lib/libvss_nv_iface.so
-/system/vendor/lib/libwvdrm_L1.so
-/system/vendor/lib/libwvm.so
-/system/vendor/lib/libWVStreamControlAPI_L1.so
-/system/vendor/lib/mediadrm/libwvdrmengine.so
-=======
->>>>>>> aosp/kitkat-mr1-release
