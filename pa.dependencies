@@ -1,9 +1,9 @@
 [
     {
-        "remote":       "aosp",
-        "repository":   "device/lge/hammerhead-kernel",
-        "target_path":  "device/lge/hammerhead-kernel",
-        "revision":     "refs/tags/android-4.4.2_r1"
+        "remote":       "github",
+        "repository":   "AOSPA/android_kernel_lge_hammerhead",
+        "target_path":  "kernel/lge/hammerhead",
+        "revision":     "kitkat"
     },
     {
         "remote":       "aosp",
