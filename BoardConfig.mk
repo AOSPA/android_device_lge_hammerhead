@@ -66,6 +66,8 @@ TARGET_BOARD_INFO_FILE := device/lge/hammerhead/board-info.txt
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 TARGET_NO_RPC := true
 
+TARGET_KERNEL_CONFIG := pa_defconfig
+
 BOARD_EGL_CFG := device/lge/hammerhead/egl.cfg
 
 USE_OPENGL_RENDERER := true
