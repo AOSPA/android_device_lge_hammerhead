@@ -3,25 +3,25 @@
         "remote":       "aosp",
         "repository":   "device/lge/hammerhead-kernel",
         "target_path":  "device/lge/hammerhead-kernel",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/audio",
         "target_path":  "hardware/qcom/audio",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/bt",
         "target_path":  "hardware/qcom/bt",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/camera",
         "target_path":  "hardware/qcom/camera",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "github",
@@ -33,25 +33,25 @@
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/keymaster",
         "target_path":  "hardware/qcom/keymaster",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
 	{
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/media",
         "target_path":  "hardware/qcom/media",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/msm8x74",
         "target_path":  "hardware/qcom/msm8x74",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/msm8960",
         "target_path":  "hardware/qcom/msm8960",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "github",
@@ -63,13 +63,13 @@
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/sensors",
         "target_path":  "hardware/qcom/sensors",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "aosp",
         "repository":   "platform/hardware/qcom/wlan",
         "target_path":  "hardware/qcom/wlan",
-        "revision":     "refs/tags/android-4.4.3_r1.1"
+        "revision":     "refs/tags/android-4.4.4_r2"
     },
     {
         "remote":       "blobs",
