@@ -296,6 +296,29 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
+
+static void touch_boost()
+{
+    int rc;
+    pid_t client;
+    char data[MAX_LENGTH];
+
+    if (client_sockfd < 0) {
+        ALOGE("%s: boost socket not created", __func__);
+        return;
+    }
+
+    client = getpid();
+
+    snprintf(data, MAX_LENGTH, "1:%d", client);
+    rc = sendto(client_sockfd, data, strlen(data), 0,
+        (const struct sockaddr *)&client_addr, sizeof(struct sockaddr_un));
+    /* Remove Annoying Logspam when mpdecision is not on or present*/
+    //if (rc < 0) {
+    //    ALOGE("%s: failed to send: %s", __func__, strerror(errno));
+    //}
+}
+
 static void power_set_interactive(__attribute__((unused)) struct power_module *module, int on)
 {
     if (last_state == -1) {
