@@ -136,8 +136,6 @@ ifeq ($(USE_SVELTE_KERNEL),true)
 MALLOC_IMPL := dlmalloc
 endif
 
--include vendor/lge/hammerhead/BoardConfigVendor.mk
-
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 

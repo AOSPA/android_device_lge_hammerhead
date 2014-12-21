@@ -28,7 +28,7 @@ PRODUCT_DEVICE := hammerhead
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on HammerHead
 PRODUCT_MANUFACTURER := LGE
-PRODUCT_RESTRICT_VENDOR_FILES := true
+PRODUCT_RESTRICT_VENDOR_FILES := false
 
 $(call inherit-product, device/lge/hammerhead/device.mk)
-$(call inherit-product-if-exists, vendor/lge/hammerhead/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/hammerhead/hammerhead-vendor.mk)
