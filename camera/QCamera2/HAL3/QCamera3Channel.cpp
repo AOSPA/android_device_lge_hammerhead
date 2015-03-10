@@ -243,6 +243,11 @@ int32_t QCamera3Channel::start()
         return NO_INIT;
     }
 
+    if(m_bIsActive) {
+        ALOGD("%s: Attempt to start active channel", __func__);
+        return rc;
+    }
+
     for (int i = 0; i < m_numStreams; i++) {
         if (mStreams[i] != NULL) {
             mStreams[i]->start();
@@ -462,6 +467,7 @@ QCamera3RegularChannel::QCamera3RegularChannel(uint32_t cam_handle,
  *==========================================================================*/
 QCamera3RegularChannel::~QCamera3RegularChannel()
 {
+    mMemory.unregisterBuffers();
 }
 
 /*===========================================================================
@@ -741,11 +747,6 @@ void QCamera3RegularChannel::streamCbRoutine(
 QCamera3Memory* QCamera3RegularChannel::getStreamBufs(uint32_t /*len*/)
 {
     return &mMemory;
-}
-
-void QCamera3RegularChannel::putStreamBufs()
-{
-    mMemory.unregisterBuffers();
 }
 
 int QCamera3RegularChannel::kMaxBuffers = 7;
@@ -1103,10 +1104,6 @@ int32_t QCamera3PicChannel::stop()
     }
 
     m_postprocessor.stop();
-    rc = m_postprocessor.deinit();
-    if (rc != 0) {
-        ALOGE("De-init Postprocessor failed");
-    }
 
     rc |= QCamera3Channel::stop();
     return rc;
@@ -1115,6 +1112,11 @@ int32_t QCamera3PicChannel::stop()
 QCamera3PicChannel::~QCamera3PicChannel()
 {
    stop();
+
+   int32_t rc = m_postprocessor.deinit();
+   if (rc != 0) {
+       ALOGE("De-init Postprocessor failed");
+   }
 }
 
 int32_t QCamera3PicChannel::initialize()
