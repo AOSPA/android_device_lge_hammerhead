@@ -1887,7 +1887,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
             ALOGV("%s: Blocking on timed conditional wait", __func__);
             rc = pthread_cond_timedwait(&mRequestCond, &mMutex, &ts);
             if (rc == ETIMEDOUT) {
-                rc = -ENODEV;
+                rc = NO_ERROR;
                 ALOGE("%s: Unblocked on timeout!!!!", __func__);
                 break;
             }
