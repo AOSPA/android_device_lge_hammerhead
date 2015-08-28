@@ -122,7 +122,7 @@ on post-fs-data
 
     # Subsytem Ramdump collection
     mkdir /data/tombstones/ramdump 0777 system system
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
     # NFC: create data/nfc for nv storage
     mkdir /data/nfc 0770 nfc nfc
