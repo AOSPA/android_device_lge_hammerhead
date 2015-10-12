@@ -344,7 +344,7 @@ on property:sys.boot_completed=1
     # Configure Yank555.lu kernel ---- End
 
 on property:ro.debuggable=1
-    start ssr_ramdump
+    # start ssr_ramdump
 
 service rmt_storage /system/bin/rmt_storage
     class core
