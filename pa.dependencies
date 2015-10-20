@@ -64,5 +64,11 @@
         "repository":   "platform/hardware/qcom/wlan",
         "target_path":  "hardware/qcom/wlan",
         "revision":     "refs/tags/android-6.0.0_r1"
+    },
+    {
+        "remote":       "aospa",
+        "repository":   "proprietary_vendor_lge_hammerhead",
+        "target_path":  "vendor/lge/hammerhead",
+        "revision":     "marshmallow"
     }
 ]
