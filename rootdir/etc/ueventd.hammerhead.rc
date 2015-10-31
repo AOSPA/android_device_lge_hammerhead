@@ -199,6 +199,9 @@
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
+# cpufreq
+/sys/devices/system/cpu/cpufreq                     interactive/go_hispeed_load 0664 system system
+
 # vm_bms
 /dev/vm_bms               0660   system     system
 /dev/battery_data         0660   system     system
