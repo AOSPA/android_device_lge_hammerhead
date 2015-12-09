@@ -413,5 +413,14 @@ endif
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
+# facelock properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.facelock.black_timeout=400 \
+    ro.facelock.det_timeout=1500 \
+    ro.facelock.rec_timeout=2500 \
+    ro.facelock.lively_timeout=2500 \
+    ro.facelock.est_max_time=600 \
+    ro.facelock.use_intro_anim=false
+
 $(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
 $(call inherit-product-if-exists, vendor/qcom/gpu/msm8x74/msm8x74-gpu-vendor.mk)
