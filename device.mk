@@ -419,6 +419,10 @@ endif
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
+# drmservice prop
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true
+
 # facelock properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.facelock.black_timeout=400 \
