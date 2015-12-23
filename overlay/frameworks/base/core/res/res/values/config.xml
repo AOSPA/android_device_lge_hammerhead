@@ -296,4 +296,7 @@
 
     <!-- Flag indicating if device supports EAP SIM, AKA, AKA' -->
     <bool name="config_eap_sim_based_auth_supported">false</bool>
+
+    <!-- Enable Doze -->
+    <bool name="config_enableAutoPowerModes">true</bool>
 </resources>
