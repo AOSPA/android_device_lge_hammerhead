@@ -334,6 +334,9 @@ on property:sys.boot_completed=1
     #     Turn on powersuspend before starting to use dynamic fsync !
     write /sys/kernel/dyn_fsync/Dyn_fsync_active "1"
 
+    # Activate swap
+    exec - root system -- /system/xbin/swapon.sh
+
     # Configure Yank555.lu kernel ---- End
 
 on property:ro.debuggable=1
