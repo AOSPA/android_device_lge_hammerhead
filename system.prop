@@ -14,6 +14,7 @@ persist.bt.enableAptXHD=true
 
 # Camera
 camera.disable_zsl_mode=1
+camera2.portability.force_api=1
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
