@@ -56,8 +56,8 @@
 /system/etc/permissions/serviceitems.xml
 /system/etc/qcril.db
 /system/etc/sensor_def_hh.conf
-/system/framework/qcrilhook.jar
-/system/framework/serviceitems.jar
+-/system/framework/qcrilhook.jar
+-/system/framework/serviceitems.jar
 /system/lib/hw/flp.msm8974.so
 /system/lib/hw/gps.msm8974.so
 /system/lib/libadsprpc.so
