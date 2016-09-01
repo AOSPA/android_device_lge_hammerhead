@@ -26,3 +26,7 @@ type sysfs_rmnet, fs_type, sysfs_type;
 type sysfs_mpdecision, fs_type, sysfs_type;
 type sysfs_surfaceflinger, fs_type, sysfs_type;
 type sysfs_smdcntl_open_timeout, fs_type, sysfs_type;
+
+# Used in N policies
+type media_device, dev_type;
+type v41_subdev_device, dev_type;
