@@ -107,7 +107,6 @@
 /data/fdAlbum                      u:object_r:camera_data_file:s0
 /data/system/time(/.*)?            u:object_r:time_data_file:s0
 /data/tombstones/ramdump(/.*)?     u:object_r:ramdump_data_file:s0
-/data/ramdump(/.*)?            u:object_r:ramdump_data_file:s0
 
 # rmt_storage is a qualcomm specific daemon responsible
 # for servicing modem filesystem requests.

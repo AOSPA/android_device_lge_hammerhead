@@ -27,9 +27,6 @@ allow netmgrd shell_exec:file rx_file_perms;
 # Runs /system/bin/ip addr flush dev <device> commands.
 allow netmgrd system_file:file rx_file_perms;
 
-# Talk to init over the property socket
-unix_socket_connect(netmgrd, property, init)
-
 # XXX Run toolbox.  Might not be needed.
 allow netmgrd toolbox_exec:file rx_file_perms;
 auditallow netmgrd toolbox_exec:file rx_file_perms;

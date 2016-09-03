@@ -16,7 +16,6 @@ allow mpdecision self:capability net_admin;
 # Create under /dev/socket/mpdecision
 allow mpdecision mpdecision_socket:dir w_dir_perms;
 allow mpdecision mpdecision_socket:sock_file create_file_perms;
-allow mpdecision socket_device:sock_file create_file_perms;
 
 # Also support mpdecision creating the /dev/socket/pb socket
 type_transition mpdecision socket_device:sock_file mpdecision_socket;
@@ -44,8 +43,7 @@ allow mpdecision sysfs:file write;
 r_dir_file(mpdecision, system_server)
 r_dir_file(mpdecision, mediaserver)
 
-allow mpdecision self:capability sys_nice;
+allow mpdecision cameraserver:dir search;
+allow mpdecision cameraserver:file { read open };
 
-allow mpdecision power_control_device:chr_file rw_file_perms;
-allow mpdecision system_data_file:dir rw_dir_perms;
-allow mpdecision system_data_file:file r_file_perms;
+allow mpdecision self:capability sys_nice;

@@ -5,17 +5,10 @@ type camera_exec, exec_type, file_type;
 # Started by init
 init_daemon_domain(camera)
 
-binder_use(camera)
-binder_call(camera, system_server)
-
-allow camera self:capability { sys_nice };
-
-allow camera system_server:unix_stream_socket { read write };
-
 # Interact with other media devices
 allow camera video_device:dir search;
-allow camera { gpu_device video_device camera_device }:chr_file rw_file_perms;
-allow camera { surfaceflinger mediaserver cameraserver }:fd use;
+allow camera { gpu_device video_device }:chr_file rw_file_perms;
+allow camera { cameraserver surfaceflinger mediaserver }:fd use;
 
 # Create front and back camera sockets (/data/cam_socket[12])
 type_transition camera system_data_file:sock_file camera_socket "cam_socket1";
@@ -37,13 +30,3 @@ allow camera sensors_device:chr_file rw_file_perms;
 # Read camera files from persist filesystem
 allow camera persist_file:dir search;
 r_dir_file(camera, persist_camera_file)
-allow camera system_file:file execmod;
-allow camera sysfs:file { getattr read write open };
-allow camera apk_data_file:dir { getattr read write open search };
-allow camera ion_device:chr_file { getattr ioctl read write open };
-allow camera storage_file:dir { getattr read write open search };
-allow camera storage_file:lnk_file { getattr read write open };
-allow camera mnt_user_file:dir { getattr read write open search };
-allow camera mnt_user_file:lnk_file { getattr read write open };
-allow camera fuse:dir { getattr read write open search };
-allow camera cameraserver:fd { use };
