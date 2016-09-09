@@ -1313,7 +1313,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                 notify_msg.message.error.frame_number = i->frame_number;
                 notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_REQUEST;
                 notify_msg.message.error.error_stream = NULL;
-                ALOGE("%s: Buffer stall observed reporting error", __func__);
+                ALOGW("%s: Buffer stall observed reporting error", __func__);
                 mCallbackOps->notify(mCallbackOps, &notify_msg);
             } else {
                 result.result = translateFromHalMetadata(metadata,
