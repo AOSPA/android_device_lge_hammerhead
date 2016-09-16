@@ -15,9 +15,9 @@ ifeq ($(strip $(TARGET_USES_ION)),true)
     LOCAL_CFLAGS += -DUSE_ION
 endif
 
-ifeq ($(call is-board-platform-in-list,msm8974 msm8226),true)
-    LOCAL_CFLAGS += -DVENUS_PRESENT
-endif
+# Fixed green bar when taking video
+# See https://bugzilla.mozilla.org/show_bug.cgi?id=1117662
+LOCAL_CFLAGS += -DVENUS_PRESENT
 
 LOCAL_CFLAGS += -D_ANDROID_
 LOCAL_COPY_HEADERS_TO := mm-camera-interface
