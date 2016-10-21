@@ -255,8 +255,14 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
         errno = 0;
         my_obj->ctrl_fd = open(dev_name, O_RDWR | O_NONBLOCK);
         CDBG("%s:  ctrl_fd = %d, errno == %d", __func__, my_obj->ctrl_fd, errno);
-        if((my_obj->ctrl_fd >= 0) || (errno != EIO && errno != ETIMEDOUT) || (n_try <= 0 )) {
+        if((my_obj->ctrl_fd >= 0) ||
+                (errno != EIO && errno != ETIMEDOUT && errno != ENODEV) ||
+                (n_try <= 0 )) {
             CDBG_HIGH("%s:  opened, break out while loop", __func__);
+            if (my_obj->ctrl_fd < 0) {
+                    ALOGE("%s: Failed to open %s: %s(%d).", __func__, dev_name,
+                            strerror(-errno), errno);
+            }
             break;
         }
         ALOGE("%s:Failed with %s error, retrying after %d milli-seconds",
