@@ -143,7 +143,7 @@ public:
 
     camera_metadata_t* translateFromHalMetadata(metadata_buffer_t *metadata,
                             nsecs_t timestamp, int32_t request_id,
-                            const CameraMetadata& jpegMetadata, uint8_t pipeline_depth);
+                            const CameraMetadata& jpegMetadata, uint8_t pipeline_depth, uint8_t capture_intent);
     int getJpegSettings(const camera_metadata_t *settings);
     int initParameters();
     void deinitParameters();
@@ -242,6 +242,7 @@ private:
         CameraMetadata jpegMetadata;
         uint8_t pipeline_depth;
         uint32_t partial_result_cnt;
+        uint8_t capture_intent;
     } PendingRequestInfo;
     typedef struct {
         uint32_t frame_number;
@@ -294,7 +295,7 @@ private:
     uint32_t mMetaFrameCount;
     const camera_module_callbacks_t *mCallbacks;
 
-    cam_stream_size_info_t mStreamConfigInfo;
+    uint8_t mCaptureIntent;
 
     static const QCameraMap EFFECT_MODES_MAP[];
     static const QCameraMap WHITE_BALANCE_MODES_MAP[];
