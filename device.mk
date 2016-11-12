@@ -280,9 +280,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
-# Enable AAC 5.1 output
+# Enable AAC 
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
+    media.aac_51_output_enabled=true \
+    qcom.hw.aac.encoder=true
 
 # Qualcomm BT aptXHD
 PRODUCT_PROPERTY_OVERRIDES += \
