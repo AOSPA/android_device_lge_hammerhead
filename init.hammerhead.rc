@@ -300,6 +300,7 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
+    user root
     group radio system wakelock
 
 # QCOM sensor
