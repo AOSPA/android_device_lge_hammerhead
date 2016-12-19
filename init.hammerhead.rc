@@ -435,7 +435,7 @@ service bdAddrLoader /system/bin/bdAddrLoader -f /persist/bluetooth/.bdaddr -h -
 #    oneshot
 #    keycodes 114 115 116
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+service mpdecision /system/bin/mpdecision --avg_comp
    class main
    user root
    group root system readproc
