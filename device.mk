@@ -285,6 +285,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
 
+# Qualcomm BT aptXHD
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bt.enableAptXHD=true
+
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1
