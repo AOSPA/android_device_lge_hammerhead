@@ -1,0 +1,3 @@
+allow vold logd:dir read;
+allow vold logd:dir open;
+allow vold logd:dir getattr;

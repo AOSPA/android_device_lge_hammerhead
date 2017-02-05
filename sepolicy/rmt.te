@@ -30,3 +30,5 @@ wakelock_use(rmt)
 
 # Allow access to /dev/uio0.
 allow rmt uio_device:chr_file rw_file_perms;
+
+allow rmt self:capability dac_override;

@@ -1,0 +1,3 @@
+allow audioserver sysfs:file read;
+allow audioserver sysfs:file open;
+allow audioserver sysfs:file getattr;
