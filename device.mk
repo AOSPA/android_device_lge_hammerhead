@@ -370,6 +370,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.codecremote=false
+
 # Input resampling configuration
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1

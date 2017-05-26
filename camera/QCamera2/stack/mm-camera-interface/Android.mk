@@ -15,9 +15,9 @@ ifeq ($(strip $(TARGET_USES_ION)),true)
     LOCAL_CFLAGS += -DUSE_ION
 endif
 
-# Fixed green bar when taking video
-# See https://bugzilla.mozilla.org/show_bug.cgi?id=1117662
-LOCAL_CFLAGS += -DVENUS_PRESENT
+ifneq (,$(filter msm8974 msm8916 msm8226 msm8610 msm8916 apq8084 msm8084 msm8994,$(TARGET_BOARD_PLATFORM)))
+    LOCAL_CFLAGS += -DVENUS_PRESENT
+endif
 
 LOCAL_CFLAGS += -D_ANDROID_
 LOCAL_COPY_HEADERS_TO := mm-camera-interface
