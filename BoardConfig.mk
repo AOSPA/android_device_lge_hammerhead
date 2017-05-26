@@ -20,6 +20,11 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
 
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_CONFIG := lineageos_hammerhead_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/hammerhead
+TARGET_KERNEL_APPEND_DTB := true
+
 TARGET_NO_BOOTLOADER := true
 
 BOARD_KERNEL_BASE := 0x00000000

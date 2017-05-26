@@ -19,27 +19,6 @@
 #
 # Everything in this directory will become public
 
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-ifeq ($(USE_SVELTE_KERNEL),true)
-LOCAL_KERNEL := device/lge/hammerhead_svelte-kernel/zImage-dtb
-else
-
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-LOCAL_KERNEL := device/lge/hammerhead_fp-kernel/zImage-dtb
-else
-LOCAL_KERNEL := device/lge/hammerhead-kernel/zImage-dtb
-endif
-
-endif
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-
-PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):kernel
-
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.rc:root/init.hammerhead.rc \
     device/lge/hammerhead/init.hammerhead.usb.rc:root/init.hammerhead.usb.rc \
@@ -175,7 +154,6 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle
 
 PRODUCT_COPY_FILES += \
-    device/lge/hammerhead/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     device/lge/hammerhead/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/hammerhead/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/lge/hammerhead/mixer_paths.xml:system/etc/mixer_paths.xml

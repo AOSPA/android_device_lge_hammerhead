@@ -32,7 +32,7 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../util
 
 LOCAL_C_INCLUDES += \
-        hardware/qcom/display/msm8974/libgralloc
+        hardware/qcom/display/libgralloc
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr

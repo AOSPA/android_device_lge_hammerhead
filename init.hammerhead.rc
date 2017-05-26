@@ -269,74 +269,12 @@ on property:sys.boot_completed=1
 
     # Configure Yank555.lu kernel ---- Start
 
-    # - Configure cpufreq Hardlimit driver
-    write /sys/kernel/cpufreq_hardlimit/userspace_dvfs_lock "1"
-    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_on "300000"
-    write /sys/kernel/cpufreq_hardlimit/scaling_min_freq_screen_off "300000"
-    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_on "2265600"
-    write /sys/kernel/cpufreq_hardlimit/scaling_max_freq_screen_off "1497600"
-    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_freq "1958400"
-    write /sys/kernel/cpufreq_hardlimit/wakeup_kick_delay "2000"
-    write /sys/kernel/cpufreq_hardlimit/touchboost_delay "750"
-    write /sys/kernel/cpufreq_hardlimit/touchboost_eventcount "3"
-    write /sys/kernel/cpufreq_hardlimit/touchboost_lo_freq "883200"
-    write /sys/kernel/cpufreq_hardlimit/touchboost_hi_freq "1267200"
-
-    # - Setup CPU governor
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "intellimm"
-    write /sys/devices/system/cpu/cpu1/online "1"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "intellimm"
-    write /sys/devices/system/cpu/cpu2/online "1"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "intellimm"
-    write /sys/devices/system/cpu/cpu3/online "1"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "intellimm"
-    restorecon_recursive /sys/devices/system/cpu/cpufreq
-    write /sys/devices/system/cpu/cpufreq/intellimm/input_event_min_freq "300000,300000,300000,300000"
-
-    # - Configure IntelliPlug
-    stop mpdecision
-    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq "300000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq "2265600"
-    write /sys/devices/system/cpu/cpu1/online "1"
-    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_min_freq "300000"
-    write /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq "2265600"
-    write /sys/devices/system/cpu/cpu2/online "1"
-    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_min_freq "300000"
-    write /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_max_freq "2265600"
-    write /sys/devices/system/cpu/cpu3/online "1"
-    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_min_freq "300000"
-    write /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq "2265600"
-    write /sys/module/intelli_plug/parameters/intelli_plug_active "1"
-    write /sys/module/intelli_plug/parameters/touch_boost_active "0"
-    write /sys/module/intelli_plug/parameters/nr_run_profile_sel "2"
-    write /sys/module/intelli_plug/parameters/nr_run_hysteresis "8"
-    write /sys/module/intelli_plug/parameters/cpu_nr_run_threshold "1000"
-
-    # - Configure IntelliThermal
-    stop thermal-engine
-    write /sys/module/msm_thermal_v2/parameters/enabled "1"
-    write /sys/module/msm_thermal_v2/parameters/core_control_mask "12"
-    write /sys/module/msm_thermal_v2/parameters/freq_control_mask "15"
-    write /sys/module/msm_thermal_v2/parameters/limit_temp_degC "70"
-    write /sys/module/msm_thermal_v2/parameters/core_limit_temp_degC "75"
-
     # - Set Vibrator strength
     write /sys/class/timed_output/vibrator/amp 63
-
-    # - Enable custom current forced fast charge
-    write /sys/kernel/fast_charge/force_fast_charge "2"
-    write /sys/kernel/fast_charge/usb_charge_level "1000"
-    write /sys/kernel/fast_charge/ac_charge_level "1800"
 
     # Switch to fiops scheduler and increase readahead buffer to 1024Kb
     write /sys/block/mmcblk0/queue/scheduler fiops
     write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
-
-    # - Enable dynamic deferred file sync (by faux123)
-    #     While screen is on, file sync is temporarily deferred, when screen
-    #     is turned off, a flush is called to synchronize all outstanding writes.
-    #     Turn on powersuspend before starting to use dynamic fsync !
-    write /sys/kernel/dyn_fsync/Dyn_fsync_active "1"
 
     # Activate swap
     exec - root system -- /system/xbin/swapon.sh
