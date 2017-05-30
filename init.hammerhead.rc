@@ -276,8 +276,6 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/scheduler fiops
     write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
 
-    # Activate swap
-    exec - root system -- /system/xbin/swapon.sh
 
     # Configure Yank555.lu kernel ---- End
 
