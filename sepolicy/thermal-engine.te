@@ -1,0 +1,4 @@
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-send-client";
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-recv-client";
+type_transition thermal-engine socket_device:sock_file thermal_socket "thermal-recv-passive-client";
+allow thermal-engine thermal_socket:sock_file create_file_perms;

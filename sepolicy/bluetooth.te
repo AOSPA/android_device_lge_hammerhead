@@ -1,1 +1,1 @@
-allow bluetooth storage_stub_file:dir getattr;
+allow bluetooth sysfs:file rw_file_perms;

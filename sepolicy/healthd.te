@@ -1,0 +1,2 @@
+allow healthd device:dir r_dir_perms;
+allow healthd self:capability dac_override;

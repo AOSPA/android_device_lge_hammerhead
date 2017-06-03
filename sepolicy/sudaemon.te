@@ -1,0 +1,16 @@
+userdebug_or_eng(`
+  get_prop(sudaemon, adbsecure_prop);
+  get_prop(sudaemon, adbtcp_prop);
+  get_prop(sudaemon, boot_mode_prop);
+  get_prop(sudaemon, device_logging_prop);
+  get_prop(sudaemon, logpersistd_logging_prop);
+  get_prop(sudaemon, mmc_prop);
+  get_prop(sudaemon, mpdecision_prop);
+  get_prop(sudaemon, recovery_prop);
+  get_prop(sudaemon, safemode_prop);
+  get_prop(sudaemon, spcomlib_prop);
+  get_prop(sudaemon, sys_usb_configfs_prop);
+  get_prop(sudaemon, sys_usb_controller_prop);
+  get_prop(sudaemon, sys_usb_tethering_prop);
+  get_prop(sudaemon, userinit_prop);
+')
