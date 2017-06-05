@@ -47,3 +47,5 @@ allow mpdecision cameraserver:dir search;
 allow mpdecision cameraserver:file { read open };
 
 allow mpdecision self:capability sys_nice;
+
+allow mpdecision power_control_device:chr_file { write open };
