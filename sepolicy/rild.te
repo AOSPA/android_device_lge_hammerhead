@@ -1,2 +1,5 @@
 # Grant access to Qualcomm MSM Interface (QMI) radio sockets to RILD
 qmux_socket(rild)
+
+# rild reads qcril.db linked to /system/etc/qcril.db
+allow rild radio_data_file:lnk_file read;
