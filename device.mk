@@ -136,11 +136,13 @@ PRODUCT_PACKAGES += \
     libOmxVenc
 
 PRODUCT_PACKAGES += \
+    audio_policy.msm8974 \
     audio.primary.msm8974 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
+    tinymix
 
 # Audio effects
 PRODUCT_PACKAGES += \
@@ -150,6 +152,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle
 
 PRODUCT_COPY_FILES += \
+    device/lge/hammerhead/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     device/lge/hammerhead/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/hammerhead/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/lge/hammerhead/mixer_paths.xml:system/etc/mixer_paths.xml
