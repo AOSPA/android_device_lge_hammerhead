@@ -306,6 +306,9 @@
     <!-- Flag indicating if device supports EAP SIM, AKA, AKA' -->
     <bool name="config_eap_sim_based_auth_supported">false</bool>
 
-    <!-- Enable Doze -->
-    <bool name="config_enableAutoPowerModes">true</bool>
+    <!-- Doze mode -->
+    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <integer name="config_screenBrightnessDoze">1</integer>
+    <bool name="config_dozeAfterScreenOff">true</bool>
+
 </resources>
