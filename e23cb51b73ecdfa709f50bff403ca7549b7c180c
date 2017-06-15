@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c523f224_debf32cf",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2017-06-15T22:43:49Z",
+      "side": 0,
+      "message": "We still want to use clang",
+      "revId": "e23cb51b73ecdfa709f50bff403ca7549b7c180c",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
