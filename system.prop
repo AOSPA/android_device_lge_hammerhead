@@ -1,0 +1,100 @@
+# API
+ro.product.first_api_level=19
+
+# Audio
+media.aac_51_output_enabled=true
+ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.audiorec=true
+qcom.hw.aac.encoder=true
+af.fast_track_multiplier=1
+audio_hal.period_size=192
+
+# Camera
+camera.disable_zsl_mode=1
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
+
+# Dalvik/VM
+dalvik.vm.dex2oat-swap=false
+dalvik.vm.heapminfree=2m
+
+# Display
+persist.hwc.mdpcomp.enable=true
+persist.mdpcomp_perfhint=50
+
+# Graphics
+ro.opengles.version=196608
+ro.sf.lcd_density=480
+
+# HWUI Memory
+ro.hwui.texture_cache_size=72
+ro.hwui.layer_cache_size=48
+ro.hwui.r_buffer_cache_size=8
+ro.hwui.path_cache_size=32
+ro.hwui.gradient_cache_size=1
+ro.hwui.drop_shadow_cache_size=6
+ro.hwui.texture_cache_flushrate=0.4
+ro.hwui.text_small_cache_width=1024
+ro.hwui.text_small_cache_height=1024
+ro.hwui.text_large_cache_width=2048
+ro.hwui.text_large_cache_height=1024
+
+# Input
+ro.input.noresample=1
+
+# Net
+net.tethering.noprovisioning=true
+
+# Perf
+ro.vendor.extension_library=libqti-perfd-client.so
+
+# QCOM
+drm.service.enabled=true
+
+# Radio/RIL/Telephony
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.mode_pref_nv10=1
+persist.radio.snapshot_enabled=1
+persist.radio.snapshot_timer=2
+persist.radio.use_cc_names=true
+persist.radio.data_no_toggle=1
+persist.radio.custom_ecc=1
+persist.radio.always_send_plmn=true
+rild.libpath=/system/lib/libril-qc-qmi-1.so
+ro.telephony.call_ring.multiple=0
+ro.telephony.default_network=10
+telephony.lteOnCdmaDevice=1
+
+# Sensors
+ro.qti.sensors.max_geomag_rotv=60
+ro.qti.sensors.max_gyro_rate=200
+ro.qti.sensors.max_accel_rate=200
+ro.qti.sensors.max_grav=200
+ro.qti.sensors.max_rotvec=200
+ro.qti.sensors.max_orient=200
+ro.qti.sensors.max_linacc=200
+ro.qti.sensors.max_gamerv_rate=200
+ro.qti.sensors.smd=true
+ro.qti.sensors.game_rv=true
+ro.qti.sensors.georv=true
+ro.qti.sensors.smgr_mag_cal_en=true
+ro.qti.sensors.step_detector=true
+ro.qti.sensors.step_counter=true
+ro.qti.sensors.pick_up=false
+ro.qti.sensors.tap=false
+ro.qti.sensors.facing=false
+ro.qti.sensors.tilt=false
+ro.qti.sensors.tilt_detector=true
+ro.qti.sensors.amd=false
+ro.qti.sensors.rmd=false
+ro.qti.sensors.vmd=false
+ro.qti.sensors.pedometer=false
+ro.qti.sensors.pam=false
+ro.qti.sdk.sensors.gestures=false
+persist.debug.sensors.hal=w
+debug.qualcomm.sns.daemon=w
+debug.qualcomm.sns.libsensor1=w
+
+# Wifi
+wifi.interface=wlan0
