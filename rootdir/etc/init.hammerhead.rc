@@ -15,12 +15,12 @@
 #
 
 import init.hammerhead.usb.rc
-import init.hammerhead_svelte.rc
 import init.hammerhead.diag.rc
-import init.hammerhead_fp.rc
+import init.hammerhead.power.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+    chmod 0775 /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
@@ -30,8 +30,11 @@ on init
 
     symlink /sdcard /storage/sdcard0
 
+    write /sys/block/zram0/comp_algorithm lz4
+
 on fs
     mount_all ./fstab.hammerhead
+    swapon_all ./fstab.hammerhead
     restorecon_recursive /persist
 
 on early-boot
@@ -51,9 +54,9 @@ on boot
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
 
-    #bluetooth UART dev
-    chown bluetooth net_bt_stack /sys/devices/platform/msm_serial_hs.0/clock
-    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+    # bluetooth UART dev
+    chown bluetooth net_bt_stack /sys/devices/f9960000.uart/clock
+    chmod 0660 /sys/devices/f9960000.uart/clock
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -84,6 +87,10 @@ on boot
     # create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
+    # MDP idle notifier
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+
     # setup permissions for fb1 related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system graphics /sys/class/graphics/fb1/vendor_name
@@ -91,16 +98,6 @@ on boot
     chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
     chmod 0664 /sys/devices/virtual/graphics/fb1/vendor_name
     chmod 0664 /sys/devices/virtual/graphics/fb1/product_description
-
-    # To allow interfaces to get v6 address when tethering is enabled
-    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
 
     # Subsytem Restart
     #adsp
@@ -117,12 +114,19 @@ on boot
     chown system system /sys/class/leds/red/rgb_start
     chmod 664 /sys/class/leds/lcd-backlight/brightness
 
+    # Enable adaptive LMK and set vmpressure_file_min
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
+    # Set per_process_reclaim tuning parameters
+    write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
+    write /sys/module/process_reclaim/parameters/pressure_min 50
+    write /sys/module/process_reclaim/parameters/pressure_max 70
+    write /sys/module/process_reclaim/parameters/per_swap_size 512
+    write /sys/module/process_reclaim/parameters/swap_opt_eff 30
+
 on post-fs-data
     write /sys/kernel/boot_adsp/boot 1
-
-    # Subsytem Ramdump collection
-    mkdir /data/tombstones/ramdump 0777 system system
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
     # NFC: create data/nfc for nv storage
     mkdir /data/nfc 0770 nfc nfc
@@ -162,125 +166,32 @@ on post-fs-data
     mkdir /data/misc/radio 0770 radio radio
     symlink /system/etc/qcril.db /data/misc/radio/qcril.db
 
+    # Create directory used by display clients
+    mkdir /data/misc/display 0770 root system
+
+    # Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
+
     setprop vold.post_fs_data_done 1
 
-    # Set the CPU Freq Sampling rates
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 70
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
-    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 960000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 960000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
-    restorecon_recursive /sys/devices/system/cpu/cpufreq/ondemand
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    write /sys/module/msm_thermal/core_control/enabled 1
-    chown system system /sys/devices/system/cpu/mfreq
-    chmod 220 /sys/devices/system/cpu/mfreq
-    chown system system /sys/devices/system/cpu/cpu1/online
-    chown system system /sys/devices/system/cpu/cpu2/online
-    chown system system /sys/devices/system/cpu/cpu3/online
-    chmod 664 /sys/devices/system/cpu/cpu1/online
-    chmod 664 /sys/devices/system/cpu/cpu2/online
-    chmod 664 /sys/devices/system/cpu/cpu3/online
-    write /dev/cpuctl/apps/cpu.notify_on_migrate 1
-
-on charger
-    # Booting modem
-    wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
-    wait /dev/block/platform/msm_sdcc.1/by-name/system
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
-    start rmt_storage
-    start irsc_util
-
-    # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/lpm_resources/enable_low_power/l2 2
-    write /sys/module/lpm_resources/enable_low_power/pxo 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu3/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    start mpdecision
-
 on property:sys.boot_completed=1
-    # Enable Power modes
-    write /sys/module/lpm_resources/enable_low_power/l2 2
-    write /sys/module/lpm_resources/enable_low_power/pxo 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu3/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/retention/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu2/retention/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu3/retention/idle_enabled 1
-    start mpdecision
-
     # enable slimport detection
     write /sys/module/slimport/parameters/enable_irq 1
 
     # enable logging of wake up reasons to kernel logs
     write /sys/module/msm_show_resume_irq/parameters/debug_mask 1
 
-    # Configure Yank555.lu kernel ---- Start
+on property:persist.sys.ssr.enable_ramdumps=1
+    # Subsytem Ramdump collection
+    mkdir /data/tombstones/ramdump 0777 system system
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    start ssr_ramdump
 
-    # - Set Vibrator strength
-    write /sys/class/timed_output/vibrator/amp 63
-
-    # Switch to fiops scheduler and increase readahead buffer to 1024Kb
-    write /sys/block/mmcblk0/queue/scheduler fiops
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
-
-
-    # Configure Yank555.lu kernel ---- End
-
-on property:ro.debuggable=1
-    # start ssr_ramdump
+on property:persist.sys.ssr.enable_ramdumps=0
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
 service rmt_storage /system/bin/rmt_storage
     class core
@@ -300,7 +211,7 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
-    group radio system wakelock
+    group radio
 
 # QCOM sensor
 service sensors /system/bin/sensors.qcom
@@ -363,14 +274,6 @@ service bdAddrLoader /system/bin/bdAddrLoader -f /persist/bluetooth/.bdaddr -h -
     group system bluetooth
     oneshot
 
-# bugreport is triggered by holding down volume down, volume up and power
-#service bugreport /system/bin/dumpstate -d -p -B \
-#        -o /data/data/com.android.shell/files/bugreports/bugreport
-#    class main
-#    disabled
-#    oneshot
-#    keycodes 114 115 116
-
 service mpdecision /system/bin/mpdecision --avg_comp
    class main
    user root
@@ -380,7 +283,7 @@ service mpdecision /system/bin/mpdecision --avg_comp
 service ssr_ramdump /system/bin/subsystem_ramdump -m -t emmc
     class main
     user root
-    group root
+    group root system
     disabled
 
 service thermal-engine /system/bin/thermal-engine-hh
@@ -398,3 +301,8 @@ service time_daemon /system/bin/time_daemon
     class late_start
     user root
     group root
+
+service audiod /system/bin/audiod
+   class late_start
+   user system
+   group system
