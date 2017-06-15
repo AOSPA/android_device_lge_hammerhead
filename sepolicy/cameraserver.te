@@ -10,8 +10,6 @@ allow cameraserver system_file:file execmod;
 allow cameraserver camera_device:chr_file { open read write ioctl };
 allow cameraserver cameraserver:fd use;
 
-# Allow writing to mpdecision
-unix_socket_send(cameraserver, mpdecision, mpdecision)
 allow cameraserver sysfs:dir { read open };
 allow cameraserver sysfs:file { read write getattr open };
 
