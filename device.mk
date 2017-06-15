@@ -119,6 +119,7 @@ PRODUCT_PACKAGES += \
     librs_jni
 
 PRODUCT_PACKAGES += \
+    copybit.msm8974 \
     gralloc.msm8974 \
     libgenlock \
     hwcomposer.msm8974 \
