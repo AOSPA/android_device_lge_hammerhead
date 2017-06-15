@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e461d09b_bffb6277",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-06-15T20:58:38Z",
+      "side": 0,
+      "message": "you removed f2fs support",
+      "revId": "eb6861aaa3397547464f76ae635bbfa9bb3842ea",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}

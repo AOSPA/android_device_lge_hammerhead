@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "917c01a3_9f73c52c",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-06-15T20:58:38Z",
+      "side": 1,
+      "message": "already set in device/qcom/common",
+      "revId": "27a5a25cc8683620e1058e39b7a17528bfb11b7d",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
