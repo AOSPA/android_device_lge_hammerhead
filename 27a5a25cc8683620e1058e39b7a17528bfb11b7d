@@ -16,6 +16,23 @@
       "revId": "27a5a25cc8683620e1058e39b7a17528bfb11b7d",
       "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a67a4c19_b94be224",
+        "filename": "hammerhead.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-06-15T21:03:31Z",
+      "side": 1,
+      "message": "remove the )",
+      "revId": "27a5a25cc8683620e1058e39b7a17528bfb11b7d",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
     }
   ]
 }
