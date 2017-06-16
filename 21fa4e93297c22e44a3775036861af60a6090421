@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a076123f_0d258bf5",
+        "filename": "bdAddrLoader/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-06-16T11:14:56Z",
+      "side": 1,
+      "message": "remove this",
+      "revId": "21fa4e93297c22e44a3775036861af60a6090421",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39eb0d8e_ddcf6be3",
+        "filename": "bdAddrLoader/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-06-16T11:14:56Z",
+      "side": 1,
+      "message": "remove this",
+      "revId": "21fa4e93297c22e44a3775036861af60a6090421",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
