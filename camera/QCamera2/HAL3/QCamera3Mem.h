@@ -65,6 +65,7 @@ public:
 protected:
     struct QCamera3MemInfo {
         int fd;
+        int main_ion_fd;
         struct ion_handle *handle;
         uint32_t size;
     };
@@ -74,7 +75,6 @@ protected:
     int mBufferCount;
     struct QCamera3MemInfo mMemInfo[MM_CAMERA_MAX_NUM_FRAMES];
     void *mPtr[MM_CAMERA_MAX_NUM_FRAMES];
-    int main_ion_fd = 0;
 };
 
 // Internal heap memory is used for memories used internally

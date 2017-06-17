@@ -205,7 +205,7 @@ int32_t QCamera3PostProcessor::start(QCamera3Channel *pInputChannel,
             return rc;
         }
     }
-    m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_START_DATA_PROC, TRUE, FALSE);
+    m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_START_DATA_PROC, FALSE, FALSE);
 
     return rc;
 }
@@ -1041,7 +1041,6 @@ void *QCamera3PostProcessor::dataProcessRoutine(void *data)
             pme->m_inputMetaQ.init();
             pme->m_ongoingJpegQ.init();
             pme->m_jpegSettingsQ.init();
-            cam_sem_post(&cmdThread->sync_sem);
 
             break;
         case CAMERA_CMD_TYPE_STOP_DATA_PROC:

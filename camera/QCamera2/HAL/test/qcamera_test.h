@@ -92,10 +92,6 @@ public:
     virtual void postDataTimestamp(nsecs_t timestamp,
                                    int32_t msgType,
                                    const sp<IMemory>& dataPtr);
-    virtual void postRecordingFrameHandleTimestamp(nsecs_t timestamp,
-            native_handle_t* handle);
-    virtual void recordingFrameHandleCallbackTimestamp(nsecs_t timestamp,
-            native_handle_t* handle);
 
 private:
 

@@ -61,10 +61,10 @@ QCamera3Memory::QCamera3Memory()
     mBufferCount = 0;
     for (int i = 0; i < MM_CAMERA_MAX_NUM_FRAMES; i++) {
         mMemInfo[i].fd = 0;
+        mMemInfo[i].main_ion_fd = 0;
         mMemInfo[i].handle = NULL;
         mMemInfo[i].size = 0;
     }
-    main_ion_fd = open("/dev/ion", O_RDONLY);
 }
 
 /*===========================================================================
@@ -78,7 +78,6 @@ QCamera3Memory::QCamera3Memory()
  *==========================================================================*/
 QCamera3Memory::~QCamera3Memory()
 {
-    close(main_ion_fd);
 }
 
 /*===========================================================================
@@ -118,8 +117,8 @@ int QCamera3Memory::cacheOpsInternal(int index, unsigned int cmd, void *vaddr)
     ALOGV("%s: addr = %p, fd = %d, handle = %p length = %d, ION Fd = %d",
          __func__, cache_inv_data.vaddr, cache_inv_data.fd,
          cache_inv_data.handle, cache_inv_data.length,
-         main_ion_fd);
-    ret = ioctl(main_ion_fd, ION_IOC_CUSTOM, &custom_data);
+         mMemInfo[index].main_ion_fd);
+    ret = ioctl(mMemInfo[index].main_ion_fd, ION_IOC_CUSTOM, &custom_data);
     if (ret < 0)
         ALOGE("%s: Cache Invalidate failed: %s\n", __func__, strerror(errno));
 
@@ -324,7 +323,9 @@ int QCamera3HeapMemory::allocOneBuffer(QCamera3MemInfo &memInfo, int heap_id, in
     struct ion_handle_data handle_data;
     struct ion_allocation_data alloc;
     struct ion_fd_data ion_info_fd;
+    int main_ion_fd = 0;
 
+    main_ion_fd = open("/dev/ion", O_RDONLY);
     if (main_ion_fd < 0) {
         ALOGE("Ion dev open failed: %s\n", strerror(errno));
         goto ION_OPEN_FAILED;
@@ -352,6 +353,7 @@ int QCamera3HeapMemory::allocOneBuffer(QCamera3MemInfo &memInfo, int heap_id, in
         goto ION_MAP_FAILED;
     }
 
+    memInfo.main_ion_fd = main_ion_fd;
     memInfo.fd = ion_info_fd.fd;
     memInfo.handle = ion_info_fd.handle;
     memInfo.size = alloc.len;
@@ -362,6 +364,7 @@ ION_MAP_FAILED:
     handle_data.handle = ion_info_fd.handle;
     ioctl(main_ion_fd, ION_IOC_FREE, &handle_data);
 ION_ALLOC_FAILED:
+    close(main_ion_fd);
 ION_OPEN_FAILED:
     return NO_MEMORY;
 }
@@ -385,10 +388,12 @@ void QCamera3HeapMemory::deallocOneBuffer(QCamera3MemInfo &memInfo)
         memInfo.fd = 0;
     }
 
-    if (main_ion_fd > 0) {
+    if (memInfo.main_ion_fd > 0) {
         memset(&handle_data, 0, sizeof(handle_data));
         handle_data.handle = memInfo.handle;
-        ioctl(main_ion_fd, ION_IOC_FREE, &handle_data);
+        ioctl(memInfo.main_ion_fd, ION_IOC_FREE, &handle_data);
+        close(memInfo.main_ion_fd);
+        memInfo.main_ion_fd = 0;
     }
     memInfo.handle = NULL;
     memInfo.size = 0;
@@ -618,15 +623,17 @@ int QCamera3GrallocMemory::registerBuffer(buffer_handle_t *buffer)
     mBufferHandle[mBufferCount] = buffer;
     mPrivateHandle[mBufferCount] =
         (struct private_handle_t *)(*mBufferHandle[mBufferCount]);
-    if (main_ion_fd < 0) {
+    mMemInfo[mBufferCount].main_ion_fd = open("/dev/ion", O_RDONLY);
+    if (mMemInfo[mBufferCount].main_ion_fd < 0) {
         ALOGE("%s: failed: could not open ion device", __func__);
         ret = NO_MEMORY;
         goto end;
     } else {
         ion_info_fd.fd = mPrivateHandle[mBufferCount]->fd;
-        if (ioctl(main_ion_fd,
+        if (ioctl(mMemInfo[mBufferCount].main_ion_fd,
                   ION_IOC_IMPORT, &ion_info_fd) < 0) {
             ALOGE("%s: ION import failed\n", __func__);
+            close(mMemInfo[mBufferCount].main_ion_fd);
             ret = NO_MEMORY;
             goto end;
         }
@@ -678,9 +685,10 @@ void QCamera3GrallocMemory::unregisterBuffers()
         struct ion_handle_data ion_handle;
         memset(&ion_handle, 0, sizeof(ion_handle));
         ion_handle.handle = mMemInfo[cnt].handle;
-    if (ioctl(main_ion_fd, ION_IOC_FREE, &ion_handle) < 0) {
+        if (ioctl(mMemInfo[cnt].main_ion_fd, ION_IOC_FREE, &ion_handle) < 0) {
             ALOGE("ion free failed");
         }
+        close(mMemInfo[cnt].main_ion_fd);
         ALOGV("put buffer %d successfully", cnt);
     }
     mBufferCount = 0;

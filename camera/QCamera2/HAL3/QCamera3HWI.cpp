@@ -247,8 +247,7 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(int cameraId,
       m_pPowerModule(NULL),
       mHdrHint(false),
       mMetaFrameCount(0),
-      mCallbacks(callbacks),
-      mCaptureIntent(0)
+      mCallbacks(callbacks)
 {
     mCameraDevice.common.tag = HARDWARE_DEVICE_TAG;
     mCameraDevice.common.version = CAMERA_DEVICE_API_VERSION_3_2;
@@ -1035,11 +1034,6 @@ int QCamera3HardwareInterface::validateCaptureRequest(
                     __func__, frameNumber, idx);
             return BAD_VALUE;
         }
-        if (*(b->buffer) == NULL) {
-            ALOGE("%s: Request %d: Buffer %d: NULL private handle!",
-                    __func__, frameNumber, idx);
-            return BAD_VALUE;
-        }
         idx++;
         b = request->output_buffers + idx;
     } while (idx < (ssize_t)request->num_output_buffers);
@@ -1319,12 +1313,12 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                 notify_msg.message.error.frame_number = i->frame_number;
                 notify_msg.message.error.error_code = CAMERA3_MSG_ERROR_REQUEST;
                 notify_msg.message.error.error_stream = NULL;
-                ALOGW("%s: Buffer stall observed reporting error", __func__);
+                ALOGE("%s: Buffer stall observed reporting error", __func__);
                 mCallbackOps->notify(mCallbackOps, &notify_msg);
             } else {
                 result.result = translateFromHalMetadata(metadata,
                         i->timestamp, i->request_id, i->jpegMetadata,
-                        i->pipeline_depth, i->capture_intent);
+                        i->pipeline_depth);
             }
 
             if (i->blob_request) {
@@ -1621,7 +1615,6 @@ int QCamera3HardwareInterface::processCaptureRequest(
             uint8_t captureIntent =
                 meta.find(ANDROID_CONTROL_CAPTURE_INTENT).data.u8[0];
 
-            mCaptureIntent = captureIntent;
             memset(mParameters, 0, sizeof(metadata_buffer_t));
             mParameters->first_flagged_entry = CAM_INTF_PARM_MAX;
             AddSetMetaEntryToBatch(mParameters, CAM_INTF_PARM_HAL_VERSION,
@@ -1755,13 +1748,6 @@ int QCamera3HardwareInterface::processCaptureRequest(
     pendingRequest.partial_result_cnt = 0;
     extractJpegMetadata(pendingRequest.jpegMetadata, request);
 
-    //extract capture intent
-    if (meta.exists(ANDROID_CONTROL_CAPTURE_INTENT)) {
-        mCaptureIntent =
-                meta.find(ANDROID_CONTROL_CAPTURE_INTENT).data.u8[0];
-    }
-    pendingRequest.capture_intent = mCaptureIntent;
-
     for (size_t i = 0; i < request->num_output_buffers; i++) {
         RequestedBufferInfo requestedBuf;
         requestedBuf.stream = request->output_buffers[i].stream;
@@ -1887,7 +1873,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
             ALOGV("%s: Blocking on timed conditional wait", __func__);
             rc = pthread_cond_timedwait(&mRequestCond, &mMutex, &ts);
             if (rc == ETIMEDOUT) {
-                rc = NO_ERROR;
+                rc = -ENODEV;
                 ALOGE("%s: Unblocked on timeout!!!!", __func__);
                 break;
             }
@@ -2192,8 +2178,7 @@ QCamera3HardwareInterface::translateFromHalMetadata(
                                  nsecs_t timestamp,
                                  int32_t request_id,
                                  const CameraMetadata& jpegMetadata,
-                                 uint8_t pipeline_depth,
-                                 uint8_t capture_intent)
+                                 uint8_t pipeline_depth)
 {
     CameraMetadata camMetadata;
     camera_metadata_t* resultMetadata;
@@ -2204,7 +2189,6 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     camMetadata.update(ANDROID_SENSOR_TIMESTAMP, &timestamp, 1);
     camMetadata.update(ANDROID_REQUEST_ID, &request_id, 1);
     camMetadata.update(ANDROID_REQUEST_PIPELINE_DEPTH, &pipeline_depth, 1);
-    camMetadata.update(ANDROID_CONTROL_CAPTURE_INTENT, &capture_intent, 1);
 
     uint8_t curr_entry = GET_FIRST_PARAM_ID(metadata);
     uint8_t next_entry;
@@ -2606,6 +2590,13 @@ QCamera3HardwareInterface::translateFromHalMetadata(
             camMetadata.update(ANDROID_CONTROL_AE_ANTIBANDING_MODE,
                 &fwk_ab_mode, 1);
             break;
+          }
+
+          case CAM_INTF_META_CAPTURE_INTENT:{
+             uint8_t *captureIntent = (uint8_t*)
+               POINTER_OF(CAM_INTF_META_CAPTURE_INTENT, metadata);
+             camMetadata.update(ANDROID_CONTROL_CAPTURE_INTENT, captureIntent, 1);
+             break;
           }
 
           case CAM_INTF_META_SCENE_FLICKER:{
