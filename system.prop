@@ -13,11 +13,6 @@ audio_hal.period_size=192
 # Bluetooth (Qualcomm BT aptXHD)
 persist.bt.enableAptXHD=true
 
-# Camera
-camera.disable_zsl_mode=1
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
-
 # Dalvik/VM
 dalvik.vm.dex2oat-swap=false
 dalvik.vm.heapminfree=2m
