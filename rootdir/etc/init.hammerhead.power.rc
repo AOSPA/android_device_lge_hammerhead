@@ -6,7 +6,6 @@ on charger
     write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -18,7 +17,6 @@ on charger
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
@@ -50,8 +48,6 @@ on enable-low-power
     write /sys/module/msm_pm/modes/cpu1/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
-
-    write /sys/module/msm_thermal/core_control/enabled 0
 
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
@@ -93,7 +89,19 @@ on enable-low-power
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
 
-    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/vadc 1
+    write /sys/kernel/msm_thermal/vadc_batt 1
+    write /sys/kernel/msm_thermal/zone0 "1728000 39 38"
+    write /sys/kernel/msm_thermal/zone1 "1574400 42 40"
+    write /sys/kernel/msm_thermal/zone2 "1497600 45 43"
+    write /sys/kernel/msm_thermal/zone3 "1267200 49 46"
+    write /sys/kernel/msm_thermal/zone4 "1190400 53 50"
+    write /sys/kernel/msm_thermal/zone5 "1036800 56 54"
+    write /sys/kernel/msm_thermal/zone6 "960000 62 60"
+    write /sys/kernel/msm_thermal/zone7 "729600 79 75"
+    write /sys/kernel/msm_thermal/sampling_ms 8000
+    write /sys/kernel/msm_thermal/enabled 1
 
     # sched
     write /dev/cpuctl/cpu.notify_on_migrate 1
@@ -125,10 +133,16 @@ on enable-low-power
     write /sys/class/devfreq/qcom,cpubw.41/cpubw_hwmon/min_mbps 250
 
 on boot
-    trigger enable-low-power
+    # Set light thermal restrictions while optimizing apps
+    # [throttle_freq, throttle_temp, unthrottle_temp]
+    write /sys/kernel/msm_thermal/zone0 "1728000 45 43"
+    write /sys/kernel/msm_thermal/zone1 "1574400 50 47"
+    write /sys/kernel/msm_thermal/zone2 "1267200 55 53"
+    write /sys/kernel/msm_thermal/enabled 1
 
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "cfq"
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
     rm /data/system/perfd/default_values
+    trigger enable-low-power
     start mpdecision
