@@ -193,10 +193,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8974
 
-# Thermal
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
-
 # Wifi
 PRODUCT_PACKAGES += \
     libwpa_client \

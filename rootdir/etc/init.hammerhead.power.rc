@@ -6,7 +6,6 @@ on charger
     write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -18,7 +17,6 @@ on charger
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
@@ -50,8 +48,6 @@ on enable-low-power
     write /sys/module/msm_pm/modes/cpu1/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
-
-    write /sys/module/msm_thermal/core_control/enabled 0
 
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
@@ -92,8 +88,6 @@ on enable-low-power
     chmod 664 /sys/devices/system/cpu/cpu1/online
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
-
-    write /sys/module/msm_thermal/core_control/enabled 1
 
     # sched
     write /dev/cpuctl/cpu.notify_on_migrate 1
