@@ -6,6 +6,7 @@ media.aac_51_output_enabled=true
 ro.qc.sdk.audio.fluencetype=fluence
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.audiorec=true
+qcom.hw.aac.encoder=true
 af.fast_track_multiplier=1
 audio_hal.period_size=192
 
