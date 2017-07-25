@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "08736be9_f3a0fba2",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:54:48Z",
+      "side": 1,
+      "message": "\u003cbool name\u003d\"config_dozePulsePickup\"\u003etrue\u003c/bool\u003e\n\u003cbool name\u003d\"config_powerDecoupleInteractiveModeFromDisplay\"\u003etrue\u003c/bool\u003e",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afe3d165_06852671",
         "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
         "patchSetId": 2
