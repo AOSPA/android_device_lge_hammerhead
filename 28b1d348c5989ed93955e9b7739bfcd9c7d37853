@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afe3d165_06852671",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:51:59Z",
+      "side": 1,
+      "message": "Gone, doesn\u0027t live here.",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b27c576_c4bfbbe6",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:51:59Z",
+      "side": 1,
+      "message": "Gone.",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8aa5e150_7bcdbbff",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:51:59Z",
+      "side": 1,
+      "message": "Gone.",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5cef03e_b5c359f9",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:51:59Z",
+      "side": 1,
+      "message": "Gone,",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f3b1d6b_985b52fc",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-07-25T12:51:59Z",
+      "side": 1,
+      "message": "And gone...",
+      "revId": "28b1d348c5989ed93955e9b7739bfcd9c7d37853",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
