@@ -140,12 +140,15 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libstagefrighthw \
+    libdivxdrmdecrypt \
+    libOmxAacEnc \
+    libOmxAmrEnc \
     libOmxCore \
-    libmm-omxcore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVdecHevc \
-    libOmxVenc
+    libOmxVenc \
+    libstagefrighthw
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
