@@ -39,6 +39,7 @@
         <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="4" />
         <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="4" />
         <device name="SND_DEVICE_IN_HANDSET_DMIC" acdb_id="4" />
+        <device name="SND_DEVICE_IN_VOICE_DMIC" acdb_id="41" />
         <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="89" />
     </acdb_ids>
 
